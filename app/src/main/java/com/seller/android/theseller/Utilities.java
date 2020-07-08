@@ -45,7 +45,7 @@ public class Utilities {
 
         // notify user
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setMessage(R.string.gps_alart_dialog)
+        builder.setMessage(R.string.gps_alert_dialog)
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {

@@ -1,14 +1,8 @@
 package com.seller.android.theseller;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.location.LocationManager;
-
-import androidx.appcompat.app.AlertDialog;
-
-import static android.content.Context.LOCATION_SERVICE;
 
 public class SaveSettings {
 
@@ -45,7 +39,7 @@ public class SaveSettings {
         if (!TempUserID.equals("empty"))
             UserID = TempUserID;// load user name
         else {
-            Intent intent = new Intent(context, Login.class);
+            Intent intent = new Intent(context, LoginActivity.class);
             context.startActivity(intent);
         }
     }

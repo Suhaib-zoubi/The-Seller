@@ -5,5 +5,10 @@
     <string name="password">Password</string>
     <string name="enter_password">Enter Password</string>
     <string name="no_internet_access">No internet access</string>
-    <string name="gps_alart_dialog">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="gps_alert_dialog">Your GPS seems to be disabled, do you want to enable it?</string>
+    <string name="valid_username">Invalid UserName</string>
+    <string name="valid_number">Please inter a valid phone number</string>
+    <string name="valid_email">Inter valid email</string>
+    <string name="valid_password">Enter six digit password</string>
+    <string name="valid_password_login">Invalid password</string>
 </resources>

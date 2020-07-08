@@ -1,21 +1,18 @@
 package com.seller.android.theseller;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,21 +20,22 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.androidquery.AQuery;
 import com.androidquery.callback.AjaxStatus;
-import com.google.android.material.snackbar.Snackbar;
+import com.basgeekball.awesomevalidation.AwesomeValidation;
+import com.basgeekball.awesomevalidation.ValidationStyle;
+import com.basgeekball.awesomevalidation.utility.RegexTemplate;
 import com.hbb20.CountryCodePicker;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     // Constants and Variables
-    public static final String LOG_TAG = MainActivity.class.getSimpleName();
+    public static final String LOG_TAG = SignUpActivity.class.getSimpleName();
     private SharedPreferences sharedpreferences;
     private static final String LOGIT = "logitKey";
     private static final String LATIT = "latitKey";
@@ -51,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
     private RelativeLayout saveAccountBT;
     private TextView errorDebug; // alert user to any error
+    private AwesomeValidation validation; // validate input argument for register
 
 
     @Override
@@ -64,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
         saveAccountBT = findViewById(R.id.buSaveAccount);
         errorDebug = findViewById(R.id.error_debug);
+        validation = new AwesomeValidation(ValidationStyle.BASIC);
         Spinner spinner = (Spinner) findViewById(R.id.gender_sign_up); //select gender
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.gender, android.R.layout.simple_spinner_item);
@@ -100,6 +100,15 @@ public class MainActivity extends AppCompatActivity {
         EditText phoneNumber = (EditText) findViewById(R.id.EDTPhoneNumber);
         Location myLocation = getLocation();
 
+        validation.addValidation(this, R.id.EDTUserName, RegexTemplate.NOT_EMPTY,
+                R.string.valid_username);
+        validation.addValidation(this, R.id.EDemail, Patterns.EMAIL_ADDRESS,
+                R.string.valid_email);
+        validation.addValidation(this, R.id.EDTpassword, ".{6,}",
+                R.string.valid_password);
+        validation.addValidation(this, R.id.EDTPhoneNumber, "[5-9]{1}[0-9]{8}$",
+                R.string.valid_number);
+
         sharedpreferences = getSharedPreferences(MYPREFERENCE,
                 Context.MODE_PRIVATE);
         if (myLocation != null) {
@@ -110,16 +119,20 @@ public class MainActivity extends AppCompatActivity {
         }
         String url = Networking.ServerURL + Networking.WebService + Networking.WebMethod_Register
                 + Networking.Users_UserName + userName.getText()
-                + "&" + Networking.Users_Password + password.getText()
-                + "&" + Networking.Users_Email + email.getText()
-                + "&" + Networking.Users_PhoneNumber + ccp.getFullNumber() + phoneNumber.getText()
+                + "&" + Networking.Users_Password + password.getText().toString().trim()
+                + "&" + Networking.Users_Email + email.getText().toString().trim()
+                + "&" + Networking.Users_PhoneNumber + ccp.getFullNumber() + phoneNumber.getText().toString().trim()
                 + "&" + Networking.Users_Logtit + sharedpreferences.getString(LOGIT, "0")
                 + "&" + Networking.Users_Latitle + sharedpreferences.getString(LATIT, "0")
                 + "&" + Networking.Users_Gender + gender;
-
-        if (Utilities.isGps_enabled(this) & !Utilities.isGps_permission(this))
+        if (Utilities.isGps_enabled(this)
+                & !Utilities.isGps_permission(this)
+                & validation.validate())
             aq.ajax(url, JSONObject.class, this, "jsonCallback");
-        else progressDialog.hide();
+        else {
+            progressDialog.hide();
+            saveAccountBT.setClickable(true);
+        }
     }
 
 
@@ -139,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 progressDialog.hide();
             } catch (JSONException e) {
-                Log.e(LOG_TAG,e.getMessage());
+                Log.e(LOG_TAG, e.getMessage());
                 progressDialog.hide();
                 saveAccountBT.setClickable(true);
             }
