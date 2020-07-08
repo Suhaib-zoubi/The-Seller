@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">The Seller</string>
+    <string name="user_name">User Name</string>
+    <string name="enter_your_name">Enter Your Name</string>
+    <string name="password">Password</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="no_internet_access">No internet access</string>
+    <string name="gps_alart_dialog">Your GPS seems to be disabled, do you want to enable it?</string>
 </resources>

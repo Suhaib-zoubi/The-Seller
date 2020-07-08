@@ -8,4 +8,15 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Base application theme. -->
+    <style name="RegisterET">
+        <!-- Customize your style here.-->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">@dimen/sub_section_margin</item>
+        <item name="android:textColor">@color/textColorNormal</item>
+    </style>
+
+
 </resources>

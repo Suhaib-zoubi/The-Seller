@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="input_item_width">300dp</dimen>
+    <dimen name="section_margin">10dp</dimen>
+    <dimen name="sub_section_margin">3dp</dimen>
+</resources>
