@@ -11,4 +11,5 @@
     <string name="valid_email">Inter valid email</string>
     <string name="valid_password">Enter six digit password</string>
     <string name="valid_password_login">Invalid password</string>
+    <string name="log_out">Logout</string>
 </resources>

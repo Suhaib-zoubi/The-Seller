@@ -1,5 +1,6 @@
 package com.seller.android.theseller;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -35,12 +36,15 @@ public class SaveSettings {
     public void LoadData() {
 
         String TempUserID = sharedpreferences.getString("UserID", "empty");
-        Distance = sharedpreferences.getInt("Distance", 500000); // add defaul distance
+        Distance = sharedpreferences.getInt("Distance", 500000); // add default distance
         if (!TempUserID.equals("empty"))
             UserID = TempUserID;// load user name
         else {
             Intent intent = new Intent(context, LoginActivity.class);
             context.startActivity(intent);
+            if (context instanceof Activity) {
+                ((Activity) context).finish();
+            }
         }
     }
 }

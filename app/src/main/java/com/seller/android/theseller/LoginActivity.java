@@ -63,7 +63,6 @@ public class LoginActivity extends AppCompatActivity {
         String url = Networking.ServerURL + Networking.WebService + Networking.WebMethod_Login
                 + Networking.Users_UserName + userName.getText()
                 + "&" + Networking.Users_Password + password.getText();
-
         if (validation.validate())
             aq.ajax(url, JSONObject.class, this, "jsonCallback");
         else {
@@ -88,6 +87,7 @@ public class LoginActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(this, ControlPanelActivity.class);
                     startActivity(intent);
+                    finish();
                     progressDialog.hide();
                 } else {
                     errorDebug.setVisibility(View.VISIBLE);
@@ -126,6 +126,7 @@ public class LoginActivity extends AppCompatActivity {
         loginBT.setClickable(true);
         userName.setText("");
         password.setText("");
+        validation.clear();
     }
 }
 

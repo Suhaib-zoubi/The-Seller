@@ -207,6 +207,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onResume();
         saveAccountBT.setClickable(true);
         errorDebug.setVisibility(View.INVISIBLE);
+        validation.clear();
     }
 }
 
