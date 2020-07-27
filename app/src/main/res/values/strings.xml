@@ -12,4 +12,13 @@
     <string name="valid_password">Enter six digit password</string>
     <string name="valid_password_login">Invalid password</string>
     <string name="log_out">Logout</string>
+    <string name="myTool">My Tool</string>
+    <string name="home">Main</string>
+    <string name="ToolNameHint">"Write Tool Name"</string>
+    <string name="ToolDescHint">"Tool Description"</string>
+    <string name="ToolPriceHint">"Enter Price"</string>
+    <string name="ToolType">Tool Type</string>
+    <string name="price">Price</string>
+    <string name="AddTool">Add</string>
+    <string name="field_cant_empty">Field can\'t be empty</string>
 </resources>

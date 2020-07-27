@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 
 public class ControlPanelActivity extends AppCompatActivity {
 
@@ -40,5 +41,8 @@ public class ControlPanelActivity extends AppCompatActivity {
                 return super.onContextItemSelected(item);
         }
     }
-
+    public void buttAddTool(View view) {
+        Intent intent=new Intent(this,AddTool.class);
+        startActivity(intent);
+    }
 }
